@@ -5,7 +5,7 @@ import struct
 def gerar_requisicao(req_res, tipo, identificador):
     req_res = req_res & 0xF
     tipo = tipo & 0xF
-    mensagem = ((((identificador << 4) | tipo) << 4) | req_res) & 0xFFFFFF
+    mensagem = ((((identificador << 4) | req_res) << 4) | tipo) & 0xFFFFFF
     return mensagem
     
 def random_id(): 

@@ -31,16 +31,24 @@ while(True):
         representacao_binaria = ''.join(format(byte, '08b') for byte in msg_server)
         print(representacao_binaria)    
         # Tipo de mensagem do servidor
-        print(type(msg_server))
+        requisidor.receber_resposta(int.from_bytes(msg_server, byteorder='little'))
+
 
     # Mensagem motivacional
     elif op == 2:   
         # Gerar o Identificador
         identficador = requisidor.random_id()
         # Gera a requisicao da mensagem
-        req = requisidor.gerar_requisicao(0, 0, identficador)
+        req = requisidor.gerar_requisicao(0, 1, identficador)
+
+        print(bin(req))
+
         # Conversao da mensagem de requisicao para um objeto de bytes
         msg = req.to_bytes(3, 'little')
+        
+        representacao_binaria = ''.join(format(byte, '08b') for byte in msg)
+        print(representacao_binaria)    
+        
         # Sock de enviando a mensagem para o servidor
         sock.sendto(msg, (UDP_IP, UDP_PORT))
         # Recebendo a mensagem do servidor
@@ -51,19 +59,28 @@ while(True):
         # Mensagem em binario do servidor
         representacao_binaria = ''.join(format(byte, '08b') for byte in msg_server)
         print(representacao_binaria)    
-        # Tipo de mensagem
-        print(type(msg_server))
+        
+        requisidor.receber_resposta(int.from_bytes(msg_server, byteorder='little'))
+
 
     # Mensagem de quantidade de requisicoes
     elif op == 3:  
         # Gerar o identificador
         identficador = requisidor.random_id()
         # Resicao da mensagem
+        
         req = requisidor.gerar_requisicao(0, 2, identficador)
-         # Conversao da mensagem de requisicao para um objeto de bytes
-        msg = req.to_bytes(3, 'little')
+        # Conversao da mensagem de requisicao para um objeto de bytes
+        print(bin(req))
+        msg = req.to_bytes(3, 'little')    
+
+        representacao_binaria = ''.join(format(byte, '08b') for byte in msg)
+        print(representacao_binaria)       
+        
         # Sock de enviando a mensagem para o servidor
         sock.sendto(msg, (UDP_IP, UDP_PORT))
+        
+        
         # Recebendo a mensagem do servidor
         msg_server, addr = sock.recvfrom(1024)
         # Exibindo a mensagem em bytes do servidor e o endereco
@@ -73,8 +90,8 @@ while(True):
         representacao_binaria = ''.join(format(byte, '08b') for byte in msg_server)
         print(representacao_binaria)    
         # Tipo de mensagem
-        print(type(msg_server))
-    
+        requisidor.receber_resposta(int.from_bytes(msg_server, byteorder='little'))
+
     elif op == 4:   
         break
     else:
@@ -82,16 +99,3 @@ while(True):
 
 
 
-
-"""req = requisidor.gerar_requisicao(0, 0, 14161)
-print(req)
-print(type(req))
-print(bin(req))
-
-msg = req.to_bytes(3, 'little')
-print(msg)
-
-
-representacao_binaria = ''.join(format(byte, '08b') for byte in msg)
-
-print(representacao_binaria)    """
