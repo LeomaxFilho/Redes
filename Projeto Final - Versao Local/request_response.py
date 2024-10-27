@@ -1,5 +1,4 @@
 import random
-from scapy.all import *
 
 def gerar_requisicao(req_res, tipo, identificador):
     req_res = req_res & 0xF
@@ -29,6 +28,4 @@ def receber_resposta_int(mensagem):
 
     print(sai)
 
-def process_packet(packet):
-    if packet.haslayer(UDP):
-        print("Pacote UDP recebido:", packet.summary())
+
