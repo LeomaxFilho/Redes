@@ -1,9 +1,15 @@
+'''
+LUIS ALVES DE PAIVA NETO
+LEOMAX DA COSTA BANDEIRA FILHO
+'''
+
 import struct
 from scapy.compat import raw # type: ignore
 from scapy.layers.inet import IP, UDP # type: ignore
 from scapy.sendrecv import sr1  # type: ignore
 import request_response
 
+# Pseudo cabecalho do IP
 def ipBytes(IP):
     ipFinish = 0
     
@@ -21,6 +27,7 @@ def ipBytes(IP):
 
     return saida
 
+# Calculo do checksum
 def checksum(data):
     if len(data) % 2 == 1:
         data += b'\x00'  # Se o tamanho for impar
@@ -33,7 +40,7 @@ def checksum(data):
 
     return ~sum & 0xFFFF  # Retorna o complemento de um
 
-
+# Calculo do checksum completo
 def udp_checksum(src_addr, dest_addr, src_port, dest_port, data):
     # Pseudo-cabeçalho
     src_addr = ipBytes(src_addr)
@@ -52,6 +59,7 @@ def udp_checksum(src_addr, dest_addr, src_port, dest_port, data):
 
     return checksum(udp_packet)
 
+# Calculo do cabecalho
 def udpHead(sourceIp, desIp, sourcePort, desPort, comprimento, data):
 
     noCheksum = struct.pack("!HHHH", sourcePort, desPort, comprimento, 0)

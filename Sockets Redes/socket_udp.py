@@ -1,3 +1,9 @@
+'''
+LUIS ALVES DE PAIVA NETO
+LEOMAX DA COSTA BANDEIRA FILHO
+'''
+
+
 import socket
 import request_response
 

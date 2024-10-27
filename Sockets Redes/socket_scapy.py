@@ -1,3 +1,8 @@
+'''
+LUIS ALVES DE PAIVA NETO
+LEOMAX DA COSTA BANDEIRA FILHO
+'''
+
 import heads
 import request_response
 from scapy.compat import raw
