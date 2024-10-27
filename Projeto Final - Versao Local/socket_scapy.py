@@ -1,4 +1,4 @@
-import udp_header
+import heads
 import request_response
 from scapy.compat import raw
 from scapy.layers.inet import IP, UDP
@@ -14,7 +14,7 @@ while(True):
     if op == 1:
 
         # Gera a mensagem para ser enviada para o servidor
-        packet = udp_header.scapy_udp(0,0,identficador)
+        packet = heads.scapy_udp(0,0,identficador)
                 
         # Envio e tratamento da mensagem 
         packet_server = sr1(packet, verbose=0)
@@ -28,7 +28,7 @@ while(True):
     # * Mensagem motivacional
     elif op == 2:
        # Gera a mensagem para ser enviada para o servidor
-        packet = udp_header.scapy_udp(0,1,identficador)
+        packet = heads.scapy_udp(0,1,identficador)
         
         # Envio e tratamento da mensagem 
         packet_server = sr1(packet, verbose=0) 
@@ -42,7 +42,7 @@ while(True):
     # * Mensagem de quantidade de requisicoes
     elif op == 3:
         # Gera a mensagem para ser enviada para o servidor
-        packet = udp_header.scapy_udp(0,2,identficador)
+        packet = heads.scapy_udp(0,2,identficador)
                 
         packet_server = sr1(packet, verbose=0)
         msg_server = packet_server.lastlayer()
