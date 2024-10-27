@@ -1,8 +1,8 @@
 import struct
 import request_response
-from scapy.compat import raw# type: ignore
-from scapy.layers.inet import IP, UDP# type: ignore
-from scapy.sendrecv import sr1 # type: ignore
+from scapy.compat import raw
+from scapy.layers.inet import IP, UDP
+from scapy.sendrecv import sr1 
 
 # Pseudo Cabecalho do IP
 def ipBytes(IP):
@@ -52,17 +52,21 @@ def udpHead(sourceIp, desIp, sourcePort, desPort, comprimento, data):
     
     return udpFinish
 
+# Preparacao do pacote com o preenchimento adequado do cabecalho
 def scapy_udp(req, tipo, identificador):
+    # Parametro de referencia
     sourceIp = ipBytes('192.168.1.102')
     desIp = ipBytes('15.228.191.109')
     sourcePort = 59155
     desPort = 50000
 
+    # Mensagem de requisicao
     requisicao = request_response.gerar_requisicao(req ,tipo , identificador)
     data = requisicao.to_bytes(3, 'little')
 
     comprimento = 8 + len(data) # o 8 vem do cabecalho fixo
 
+    # Cabecalho UDP
     udpHeader = udpHead(sourceIp, desIp, sourcePort, desPort, comprimento, data)
     udpHeader = int.from_bytes(udpHeader, byteorder='big')
 

@@ -1,8 +1,8 @@
 import udp_header
 import request_response
-from scapy.compat import raw# type: ignore
-from scapy.layers.inet import IP, UDP# type: ignore
-from scapy.sendrecv import sr1 # type: ignore
+from scapy.compat import raw
+from scapy.layers.inet import IP, UDP
+from scapy.sendrecv import sr1 
 
 while(True):   
     op = int(input("[1] Data e Hora\n[2] Mensagem Motivacional\n[3] Respostas Emitidas\n[4] Sair: "))
